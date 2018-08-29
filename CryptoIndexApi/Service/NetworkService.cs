@@ -1,33 +1,28 @@
 ﻿using CrytoIndex.Models;
 using CrytoIndex.Service;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-
-namespace CrytoIndex
+namespace CryptoIndexApi.Service
 {
-    public class Main
+    public class NetworkService
     {
         public List<Data> mCoinList { get; set; }
         public NetworkServiceApi mNetworkService { get; set; }
-        public Main()
-        {
-            mCoinList = new List<Data>();
+
+        public List<Data> GetAllCoinData() {
             GetAllCoins();
             PopulateCurrentTop100Rates();
-
-            var temp = mCoinList;
-
-
+            return mCoinList;
         }
 
         public void GetAllCoins()
         {
-
-            mNetworkService = new NetworkServiceApi(mCoinList);
+            mCoinList = new List<Data>();
+            mNetworkService = new CrytoIndex.Service.NetworkServiceApi(mCoinList);
             mCoinList = mNetworkService.GetCoinList();
 
         }
@@ -35,7 +30,7 @@ namespace CrytoIndex
 
         public void PopulateCurrentTop100Rates()
         {
-            var filteredlist =  mCoinList.Take(100).ToList();
+            var filteredlist = mCoinList.Take(100).ToList();
             mNetworkService.PopulateCurrentRates(filteredlist);
         }
 

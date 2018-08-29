@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace CrytoIndex.Service
 {
-    public class NetworkService
+    public class NetworkServiceApi
     {
         private List<Data> mCoinList { get; set; }
-        public NetworkService(List<Data> coinList)
+        public NetworkServiceApi(List<Data> coinList)
         {
             this.mCoinList = coinList;
         }
