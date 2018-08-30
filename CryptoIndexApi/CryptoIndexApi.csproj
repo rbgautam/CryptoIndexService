@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\NetworkService.cs" />
+    <Compile Include="Utils\BrowserJsonFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
