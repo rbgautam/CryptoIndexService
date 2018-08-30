@@ -27,7 +27,7 @@ namespace CryptoIndexApi
             //                  StringComparison.InvariantCultureIgnoreCase,
             //                  true,
             //                  "application/json"));
-
+            //Custom formatter to publish JSON
             config.Formatters.Add(new BrowserJsonFormatter());
         }
     }
