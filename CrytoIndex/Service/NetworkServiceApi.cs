@@ -92,7 +92,7 @@ namespace CrytoIndex.Service
             foreach (var coin in mCoinList)
             {
                 count++;
-                var symbol = coin.getSymbol();
+                var symbol = coin.Symbol;
                 try
                 {
 
