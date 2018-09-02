@@ -17,8 +17,16 @@ namespace CryptoIndexApi.Controllers
         public IEnumerable<Data> Coindata()
         {
             NetworkService networkService = new NetworkService();
-            var temp = networkService.GetAllCoinData();
-            return temp;
+            
+            return networkService.GetAllCoinData(); 
+        }
+
+        [HttpGet]
+        public void RefreshCoindata()
+        {
+            NetworkService networkService = new NetworkService();
+
+            networkService.RefreshCoinData();
         }
     }
 }

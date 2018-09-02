@@ -15,16 +15,14 @@ namespace CryptoIndexRepository
             TestDbCreation();
         }
 
-        private void TestDbCreation()
+        public void TestDbCreation()
         {
             try
             {
                 using (var db = new CryptoIndexDbContext())
                 {
-                    var coin = new CryptoIndexDbContext.Coin { Symbol="TEST",guid= new Guid(), FullName = "test Coin" };
-                    //var currPriceRaw = new CurrentPriceRaw { Symbol = "TEST", guid = new Guid() };
-                    //var currPriceDisp = new CurrentPriceDisplay { Symbol = "TEST", guid = new Guid() };
-
+                    var coin = new CryptoIndexDbContext.Coin { Symbol="TEST",guid= Guid.NewGuid() , FullName = "test Coin" };
+                    
                     db.Coins.Add(coin);
                     //db.PriceRaw.Add(currPriceRaw);
                     //db.PriceDisplay.Add(currPriceDisp);

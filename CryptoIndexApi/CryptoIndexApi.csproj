@@ -283,6 +283,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CryptoIndexRepository\CryptoIndexRepository.csproj">
+      <Project>{370fc434-7157-46af-b4b1-14ba494d8270}</Project>
+      <Name>CryptoIndexRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CrytoIndex\CrytoIndex.csproj">
       <Project>{157d4698-cafa-49bf-908c-1f67a155746b}</Project>
       <Name>CrytoIndex</Name>

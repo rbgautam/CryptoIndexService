@@ -27,6 +27,11 @@ namespace CryptoIndexApi.Service
 
         }
 
+        internal void RefreshCoinData()
+        {
+            CryptoIndexRepository.Main cryptoIndexRepository = new CryptoIndexRepository.Main();
+            cryptoIndexRepository.TestDbCreation();
+        }
 
         public void PopulateCurrentTop100Rates()
         {
