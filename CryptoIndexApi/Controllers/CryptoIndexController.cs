@@ -14,19 +14,25 @@ namespace CryptoIndexApi.Controllers
     public class CryptoIndexController : ApiController
     {
         [HttpGet]
+        [Route("api/cryptoindex/Coindata")]
+
         public IEnumerable<Data> Coindata()
         {
             NetworkService networkService = new NetworkService();
-            
-            return networkService.GetAllCoinData(); 
+
+            return networkService.GetAllCoinData();
         }
 
         [HttpGet]
-        public void RefreshCoindata()
+        [Route("api/cryptoindex/Refresh")]
+
+        public bool RefreshCoindata()
         {
             NetworkService networkService = new NetworkService();
 
             networkService.RefreshCoinData();
+
+            return true;
         }
     }
 }

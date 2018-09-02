@@ -72,6 +72,8 @@ namespace CryptoIndexRepository.Context
             public string MKTCAP { get; set; }
             public string TOTALVOLUME24H { get; set; }
             public string TOTALVOLUME24HTO { get; set; }
+
+            public DateTime TIMESTAMP { get; set; }
             public string ErrorMessage { get; set; }
         }
 
