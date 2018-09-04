@@ -13,7 +13,8 @@ namespace CryptoIndexApi.Service
         public List<Data> mCoinList { get; set; }
         public NetworkServiceApi mNetworkService { get; set; }
 
-        public List<Data> GetAllCoinData() {
+        public List<Data> GetAllCoinData()
+        {
             GetAllCoins();
             PopulateCurrentTop100Rates();
             return mCoinList;
@@ -27,10 +28,17 @@ namespace CryptoIndexApi.Service
 
         }
 
-        internal void RefreshCoinData()
+        public void RefreshCoinData()
         {
-            CryptoIndexRepository.Main cryptoIndexRepository = new CryptoIndexRepository.Main();
-            cryptoIndexRepository.TestDbCreation();
+            DateTime timeStamp = DateTime.Now;
+            Guid newGuid = Guid.NewGuid();
+            var coinData = GetAllCoinData();
+            foreach (Data coin in coinData )
+            {
+                coin.guid = newGuid;
+                coin.TIMESTAMP = timeStamp;
+                mNetworkService.UpdateDbWithLatestRates(coin);
+            }
         }
 
         public void PopulateCurrentTop100Rates()

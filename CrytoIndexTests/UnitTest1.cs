@@ -19,7 +19,7 @@ namespace CrytoIndexTests
         [TestMethod]
         public void TestCreateDb()
         {
-           CryptoIndexRepository.Main driver = new CryptoIndexRepository.Main();
+           CryptoIndexRepository.Repository driver = new CryptoIndexRepository.Repository();
 
             Assert.IsNotNull(driver);
         }

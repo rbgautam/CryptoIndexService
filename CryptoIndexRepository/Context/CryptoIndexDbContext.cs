@@ -54,24 +54,24 @@ namespace CryptoIndexRepository.Context
             public string FROMSYMBOL { get; set; }
             public string TOSYMBOL { get; set; }
             public string MARKET { get; set; }
-            public string PRICE { get; set; }
-            public string LASTUPDATE { get; set; }
-            public string LASTVOLUME { get; set; }
-            public string LASTVOLUMETO { get; set; }
+            public Nullable<double> PRICE { get; set; }
+            public double LASTUPDATE { get; set; }
+            public double LASTVOLUME { get; set; }
+            public double LASTVOLUMETO { get; set; }
             public string LASTTRADEID { get; set; }
-            public string VOLUME24HOUR { get; set; }
-            public string VOLUME24HOURTO { get; set; }
-            public string OPEN24HOUR { get; set; }
-            public string HIGH24HOUR { get; set; }
-            public string LOW24HOUR { get; set; }
-            public string CHANGE24HOUR { get; set; }
-            public string CHANGEPCT24HOUR { get; set; }
-            public string CHANGEDAY { get; set; }
-            public string CHANGEPCTDAY { get; set; }
-            public string SUPPLY { get; set; }
-            public string MKTCAP { get; set; }
-            public string TOTALVOLUME24H { get; set; }
-            public string TOTALVOLUME24HTO { get; set; }
+            public double VOLUME24HOUR { get; set; }
+            public double VOLUME24HOURTO { get; set; }
+            public double OPEN24HOUR { get; set; }
+            public double HIGH24HOUR { get; set; }
+            public double LOW24HOUR { get; set; }
+            public double CHANGE24HOUR { get; set; }
+            public double CHANGEPCT24HOUR { get; set; }
+            public double CHANGEDAY { get; set; }
+            public double CHANGEPCTDAY { get; set; }
+            public long SUPPLY { get; set; }
+            public double MKTCAP { get; set; }
+            public double TOTALVOLUME24H { get; set; }
+            public double TOTALVOLUME24HTO { get; set; }
 
             public DateTime TIMESTAMP { get; set; }
             public string ErrorMessage { get; set; }

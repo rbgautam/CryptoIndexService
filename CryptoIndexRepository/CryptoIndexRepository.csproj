@@ -47,16 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Context\CryptoIndexDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CrytoIndex\CrytoIndex.csproj">
-      <Project>{157d4698-cafa-49bf-908c-1f67a155746b}</Project>
-      <Name>CrytoIndex</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
-﻿using CrytoIndex.Models;
+﻿using CryptoIndexRepository;
+using CrytoIndex.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CryptoIndexRepository.Context.CryptoIndexDbContext;
 
 namespace CrytoIndex.Service
 {
@@ -86,8 +88,10 @@ namespace CrytoIndex.Service
             return mCoinList.OrderBy(o => o.getSortOrderValue()).ToList();
         }
 
-        public void PopulateCurrentRates(List<Data> mCoinList)
+        public bool PopulateCurrentRates(List<Data> mCoinList)
         {
+            bool result = true;
+
             int count = 0;
             foreach (var coin in mCoinList)
             {
@@ -145,15 +149,37 @@ namespace CrytoIndex.Service
                         }
                     }
 
-
+                    
                 }
                 catch (Exception ex)
                 {
-
+                    return false;
                     throw;
                 }
 
+                //if (!UpdateDbWithLatestRates(coin)) {
+                //    result = false;
+                //}
             }
+
+            return result;
+        }
+
+        public bool UpdateDbWithLatestRates(Data data)
+        {
+            bool result = false;
+            try
+            {
+                Repository repo = new Repository();
+                repo.RefreshCoinDb(data.ConvertToCoin());
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw;
+            }
+
+            return result;
         }
     }
 }

@@ -9,10 +9,6 @@ namespace CrytoIndex.Models
 {
     public class CurrentPriceRaw
     {
-        //[Key]
-        //public string Symbol { get; set; }
-        [Key]
-        public Guid guid { get; set; }
         public string TYPE { get; set; }
         public string MARKET { get; set; }
         public string FROMSYMBOL { get; set; }
