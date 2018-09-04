@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static CryptoIndexRepository.Context.CryptoIndexDbContext;
 
 namespace CryptoIndexApi.Service
 {
@@ -13,7 +14,9 @@ namespace CryptoIndexApi.Service
         public List<Data> mCoinList { get; set; }
         public NetworkServiceApi mNetworkService { get; set; }
 
-        public List<Data> GetAllCoinData()
+
+
+        public List<Data> UpdateAllCoinData()
         {
             GetAllCoins();
             PopulateCurrentRates();
@@ -28,11 +31,18 @@ namespace CryptoIndexApi.Service
 
         }
 
+        public IEnumerable<Coin> GetAllCoinData()
+        {
+            mCoinList = new List<Data>();
+            mNetworkService = new CrytoIndex.Service.NetworkServiceApi(mCoinList);
+            return mNetworkService.GetAllCoinData();
+        }
+
         public void RefreshCoinData()
         {
             DateTime timeStamp = DateTime.Now;
             Guid newGuid = Guid.NewGuid();
-            var coinData = GetAllCoinData();
+            var coinData = UpdateAllCoinData();
             foreach (Data coin in coinData)
             {
                 coin.guid = newGuid;

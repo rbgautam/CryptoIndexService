@@ -7,20 +7,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using static CryptoIndexRepository.Context.CryptoIndexDbContext;
 
 namespace CryptoIndexApi.Controllers
 {
     public class CryptoIndexController : ApiController
     {
         [HttpGet]
-        [Route("api/cryptoindex/Coindata")]
+        [Route("api/cryptoindex/Coindata/{count?}")]
 
-        public IEnumerable<Data> Coindata()
+        public IEnumerable<Coin> Coindata(int count=0)
         {
+            //TODO: return Cached data if available
             NetworkService networkService = new NetworkService();
-
-            return networkService.GetAllCoinData();
+            var resultList = networkService.GetAllCoinData();
+            if (count > 0) {
+                resultList = resultList.Take(count).ToList();
+            }
+            return resultList;
         }
 
         [HttpGet]

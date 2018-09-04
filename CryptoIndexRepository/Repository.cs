@@ -51,5 +51,22 @@ namespace CryptoIndexRepository
 
             return result;
         }
+
+        public IEnumerable<Coin> GetAllCoinData()
+        {
+            try
+            {
+                using (var db = new CryptoIndexDbContext())
+                {
+                    return db.Coins.OrderBy(o=>o.SortOrderValue).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

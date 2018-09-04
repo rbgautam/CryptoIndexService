@@ -15,10 +15,12 @@ namespace CrytoIndex.Service
     public class NetworkServiceApi
     {
         private List<Data> mCoinList { get; set; }
+        Repository mRepository = new Repository();
         public NetworkServiceApi(List<Data> coinList)
         {
             this.mCoinList = coinList;
         }
+
 
         public List<Data> GetCoinList()
         {
@@ -48,6 +50,11 @@ namespace CrytoIndex.Service
             return mCoinList.OrderBy(o => o.getSortOrderValue()).ToList();
         }
 
+        public IEnumerable<Coin> GetAllCoinData()
+        {
+            return mRepository.GetAllCoinData();
+        }
+
         public bool PopulateCurrentRates(List<Data> mCoinList)
         {
             bool result = true;
@@ -67,9 +74,11 @@ namespace CrytoIndex.Service
 
                     JObject rss = JObject.Parse(response.Content);
                     string rssResponse = (string)rss["Response"];
-                    if (rssResponse!= null && rssResponse.Equals("Error")) {
+                    if (rssResponse != null && rssResponse.Equals("Error"))
+                    {
                         string rssMessage = (string)rss["Message"];
-                        if (!string.IsNullOrEmpty(rssMessage)) {
+                        if (!string.IsNullOrEmpty(rssMessage))
+                        {
                             coin.currentPriceRaw.ErrorMessage = rssMessage;
                             coin.currentPriceDisplay.ErrorMessage = rssMessage;
                         }
@@ -77,8 +86,9 @@ namespace CrytoIndex.Service
                     }
                     //Set raw data
                     var ratesRaw = (from p in rss["RAW"][symbol]
-                                select p).ToList();
-                    if (ratesRaw != null) {
+                                    select p).ToList();
+                    if (ratesRaw != null)
+                    {
                         foreach (var rate in ratesRaw)
                         {
                             coin.currentPriceRaw = JsonConvert.DeserializeObject<CurrentPriceRaw>(rate.FirstOrDefault().ToString());
@@ -86,7 +96,7 @@ namespace CrytoIndex.Service
                     }
                     //Set display data
                     var ratesDisplay = (from p in rss["DISPLAY"][symbol]
-                                    select p).ToList();
+                                        select p).ToList();
 
                     if (ratesDisplay != null)
                     {
@@ -110,8 +120,7 @@ namespace CrytoIndex.Service
             bool result = false;
             try
             {
-                Repository repo = new Repository();
-                repo.RefreshCoinDb(data.ConvertToCoin());
+               mRepository.RefreshCoinDb(data.ConvertToCoin());
             }
             catch (Exception ex)
             {
