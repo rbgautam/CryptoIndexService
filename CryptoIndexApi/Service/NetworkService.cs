@@ -16,7 +16,7 @@ namespace CryptoIndexApi.Service
         public List<Data> GetAllCoinData()
         {
             GetAllCoins();
-            PopulateCurrentTop100Rates();
+            PopulateCurrentRates();
             return mCoinList;
         }
 
@@ -33,7 +33,7 @@ namespace CryptoIndexApi.Service
             DateTime timeStamp = DateTime.Now;
             Guid newGuid = Guid.NewGuid();
             var coinData = GetAllCoinData();
-            foreach (Data coin in coinData )
+            foreach (Data coin in coinData)
             {
                 coin.guid = newGuid;
                 coin.TIMESTAMP = timeStamp;
@@ -41,10 +41,23 @@ namespace CryptoIndexApi.Service
             }
         }
 
-        public void PopulateCurrentTop100Rates()
+        public void PopulateCurrentTop100Rates(int count = 100)
         {
-            var filteredlist = mCoinList.Take(100).ToList();
-            mNetworkService.PopulateCurrentRates(filteredlist);
+            if (mCoinList.Count > 0)
+            {
+                //Always to be called after the GetAllCoins()
+                var filteredlist = mCoinList.Take(count).ToList();
+                mNetworkService.PopulateCurrentRates(filteredlist);
+            }
+        }
+
+        public void PopulateCurrentRates()
+        {
+            if (mCoinList.Count > 0) {
+                var filteredlist = mCoinList.ToList();
+                mNetworkService.PopulateCurrentRates(filteredlist);
+            }
+               
         }
 
     }
