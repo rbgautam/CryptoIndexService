@@ -64,7 +64,7 @@ namespace CryptoIndexRepository
                     if (count == 0)
                         return db.Coins.Where(s=>s.guid == latestguid).OrderBy(o=>o.SortOrderValue).ToList();
                     else
-                        return db.Coins.Where(s => s.guid == latestguid).Take(count).OrderBy(o => o.SortOrderValue).ToList();
+                        return db.Coins.Where(s => s.guid == latestguid).OrderBy(o => o.SortOrderValue).Take(count).ToList();
                 }
 
             }
