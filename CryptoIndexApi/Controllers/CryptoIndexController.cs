@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using static CryptoIndexRepository.Context.CryptoIndexDbContext;
 
@@ -27,11 +28,11 @@ namespace CryptoIndexApi.Controllers
         [HttpGet]
         [Route("api/cryptoindex/Refresh")]
 
-        public bool RefreshCoindata()
+        public async Task<bool> RefreshCoindata()
         {
             NetworkService networkService = new NetworkService();
 
-            networkService.RefreshCoinData();
+            await networkService.RefreshCoinData();
 
             return true;
         }

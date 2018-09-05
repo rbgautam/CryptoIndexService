@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using static CryptoIndexRepository.Context.CryptoIndexDbContext;
 
@@ -38,7 +39,7 @@ namespace CryptoIndexApi.Service
             return mNetworkService.GetAllCoinData(count);
         }
 
-        public void RefreshCoinData()
+        public async Task RefreshCoinData()
         {
             DateTime timeStamp = DateTime.Now;
             Guid newGuid = Guid.NewGuid();
@@ -47,7 +48,9 @@ namespace CryptoIndexApi.Service
             {
                 coin.guid = newGuid;
                 coin.TIMESTAMP = timeStamp;
-                mNetworkService.UpdateDbWithLatestRates(coin);
+                coin.Url = "https://www.cryptocompare.com" + coin.Url;
+                coin.ImageUrl = "https://www.cryptocompare.com" + coin.ImageUrl;
+                await mNetworkService.UpdateDbWithLatestRates(coin);
             }
         }
 

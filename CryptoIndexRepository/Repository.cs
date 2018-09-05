@@ -30,9 +30,9 @@ namespace CryptoIndexRepository
             }
         }
 
-        public bool RefreshCoinDb(Coin coin)
+        public async Task<int> RefreshCoinDb(Coin coin)
         {
-            bool result = true;
+            int result = -1;
             //TODO: see if can be done async
             //TODO: see if can be done in bulk
             try
@@ -40,12 +40,12 @@ namespace CryptoIndexRepository
                 using (var db = new CryptoIndexDbContext())
                 {
                     db.Coins.Add(coin);
-                    db.SaveChanges();
+                    result = await db.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
             {
-                result = false;
+                result = -1;
 
             }
 

@@ -115,16 +115,16 @@ namespace CrytoIndex.Service
             return result;
         }
 
-        public bool UpdateDbWithLatestRates(Data data)
+        public async Task<int> UpdateDbWithLatestRates(Data data)
         {
-            bool result = false;
+            int result = -1;
             try
             {
-                mRepository.RefreshCoinDb(data.ConvertToCoin());
+                result = await mRepository.RefreshCoinDb(data.ConvertToCoin());
             }
             catch (Exception ex)
             {
-                return false;
+                return -1;
                 throw;
             }
             return result;
