@@ -52,13 +52,19 @@ namespace CryptoIndexRepository
             return result;
         }
 
-        public IEnumerable<Coin> GetAllCoinData()
+        public IEnumerable<Coin> GetAllCoinData(int count)
         {
             try
             {
                 using (var db = new CryptoIndexDbContext())
                 {
-                    return db.Coins.OrderBy(o=>o.SortOrderValue).ToList();
+
+                    Guid latestguid = GetLatestGuid();
+
+                    if (count == 0)
+                        return db.Coins.Where(s=>s.guid == latestguid).OrderBy(o=>o.SortOrderValue).ToList();
+                    else
+                        return db.Coins.Where(s => s.guid == latestguid).Take(count).OrderBy(o => o.SortOrderValue).ToList();
                 }
 
             }
@@ -67,6 +73,24 @@ namespace CryptoIndexRepository
 
                 throw;
             }
+        }
+
+        private Guid GetLatestGuid()
+        {
+            Guid result = new Guid();
+            try
+            {
+                using (var db = new CryptoIndexDbContext()) {
+
+                    result = db.Coins.Take(1).OrderByDescending(o => o.TIMESTAMP).Select(s => s.guid).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return result;
         }
     }
 }

@@ -20,10 +20,7 @@ namespace CryptoIndexApi.Controllers
         {
             //TODO: return Cached data if available
             NetworkService networkService = new NetworkService();
-            var resultList = networkService.GetAllCoinData();
-            if (count > 0) {
-                resultList = resultList.Take(count).ToList();
-            }
+            var resultList = networkService.GetAllCoinData(count);
             return resultList;
         }
 

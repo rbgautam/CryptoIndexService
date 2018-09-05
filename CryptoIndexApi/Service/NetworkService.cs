@@ -31,11 +31,11 @@ namespace CryptoIndexApi.Service
 
         }
 
-        public IEnumerable<Coin> GetAllCoinData()
+        public IEnumerable<Coin> GetAllCoinData(int count)
         {
             mCoinList = new List<Data>();
             mNetworkService = new CrytoIndex.Service.NetworkServiceApi(mCoinList);
-            return mNetworkService.GetAllCoinData();
+            return mNetworkService.GetAllCoinData(count);
         }
 
         public void RefreshCoinData()

@@ -50,9 +50,9 @@ namespace CrytoIndex.Service
             return mCoinList.OrderBy(o => o.getSortOrderValue()).ToList();
         }
 
-        public IEnumerable<Coin> GetAllCoinData()
+        public IEnumerable<Coin> GetAllCoinData(int count)
         {
-            return mRepository.GetAllCoinData();
+            return mRepository.GetAllCoinData(count);
         }
 
         public bool PopulateCurrentRates(List<Data> mCoinList)
@@ -120,7 +120,7 @@ namespace CrytoIndex.Service
             bool result = false;
             try
             {
-               mRepository.RefreshCoinDb(data.ConvertToCoin());
+                mRepository.RefreshCoinDb(data.ConvertToCoin());
             }
             catch (Exception ex)
             {
